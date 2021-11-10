@@ -31,6 +31,7 @@ const simplifyData = (data) => {
           sd["unclassified"].items = [...sd["unclassified"].items, miniItem];
         }
       }
+      return null;
     });
     groups.map((gp) => {
       prima.push({ category: gp, items: [...sd[gp].items], selected:sd[gp].selected });
@@ -41,7 +42,6 @@ const simplifyData = (data) => {
   const watchSelected =(items)=>{
     let checked = []
     let unchecked = []
-    let theItems = items.length
     items.map(item =>{
       if(item.checked){
         checked.push(item.id)
@@ -56,7 +56,6 @@ const simplifyData = (data) => {
   const watchAllSelected =(data)=>{
     let checked = []
     let unchecked = []
-    let theItems = data.length
     let getData = data
     getData.map((cat,i)=>{
       cat.items.map(item =>{
@@ -85,6 +84,7 @@ const simplifyData = (data) => {
       });
       dcopy[i].items = work;
       dcopy[i].selected = true;
+      return null;
     })
     // let newSelected = [...new Set([...state.applicable_items, ...pickedItem])]
 
