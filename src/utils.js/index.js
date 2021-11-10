@@ -50,7 +50,6 @@ const simplifyData = (data) => {
       }
       return null ;
     })
-    console.log(`chekcked: %d \n unchecked: %d \n the items %d`, checked.length, unchecked.length, theItems)
     return (unchecked.length === 0 && checked.length !== 0) ? true : false
   }
 
@@ -70,7 +69,6 @@ const simplifyData = (data) => {
       })
 
     })
-    console.log(`chekcked: %d \n unchecked: %d \n the items %d`, checked.length, unchecked.length, theItems)
     return (unchecked.length === 0 && checked.length !== 0) ? true : false
   }
   const selectAll = (data) => {

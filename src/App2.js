@@ -40,10 +40,9 @@ function App() {
   });
   const red = simplifyData(Data);
   const [myData, setMyData] = useState(red);
-  console.log("my dataaa", myData);
 
   //   const onSubmit = () => {
-  //     console.log(state);
+
   //   };
     const clearSelection = () => {
         formik.setFieldValue("applicable_items", []);
@@ -52,7 +51,6 @@ function App() {
         formik.setFieldValue("rate", "");
     };
   const onApplicableSelect = (e, setFieldValue) => {
-    console.log("applicable select", e.target.value);
     if (e.target.value === "all") {
       // map through all items and set them to checked and adding them to the array of check items
       // myData.map((data, i) =>{
@@ -72,7 +70,6 @@ function App() {
   };
 
   const categoryClick = (e, ci, setFieldValue) => {
-    console.log("clicked category element", e.target.checked, ci);
     let dcopy = myData;
     let pickedItem = [];
     // let work = []
@@ -133,7 +130,6 @@ function App() {
     }
     setMyData([...dcopy]);
 
-    // console.log(`clicked item eement: %s \n
     // clicked item Category index: %d \n
     // `,e,ci)
   };
@@ -158,7 +154,6 @@ function App() {
         }
         return item;
       });
-      // console.log("data to be modified", work);
       // set  picked item
       setState({
         ...state,
@@ -185,17 +180,13 @@ function App() {
         // item = { ...item, checked: false };
         return item;
       });
-      // console.log("data to be modified", work);
       let newItem = [];
       let fill = state.applicable_items.filter((pi) => pi !== selectedItem);
-      console.log("the copy0", dcopy[ci]);
       dcopy[ci].selected = false;
       dcopy[ci].items = work;
       setState({ ...state, applied_to: "some", applicable_items: [...fill] });
       formik.setFieldValue("applied_to", "some");
       formik.setFieldValue("applicable_items", [...fill]);
-
-      console.log("copied midifed", dcopy[ci]);
     }
     setMyData([...dcopy]);
   };
