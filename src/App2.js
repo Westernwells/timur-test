@@ -18,12 +18,12 @@ function App() {
     rate: "",
   });
   const SignupSchema = Yup.object().shape({
-    applied_to: Yup.string().required("Required"),
+    applied_to: Yup.string().required("Applied to is Required"),
     name: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Required"),
-    rate: Yup.number().required("Required").positive().integer(),
+      .required("Name is Required"),
+    rate: Yup.number().round("floor").required("Rate is Required").positive(),
     applicable_items: Yup.array().min(1).required("Required"),
   });
   const formik = useFormik({
@@ -218,7 +218,9 @@ function App() {
                     className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                   {formik.errors.name && formik.touched.name ? (
-                    <div>{formik.errors.name}</div>
+                       <p className="mt-2 text-sm text-red-600" id="name-error">
+                           {formik.errors.name}
+                     </p>
                   ) : null}
                 </div>
               </div>
@@ -245,7 +247,11 @@ function App() {
                   </div>
                 </div>
                 {formik.errors.rate && formik.touched.rate ? (
-                  <div>{formik.errors.rate}</div>
+                      <p className="mt-2 text-sm text-red-600" id="rate-error">
+                     
+                          {formik.errors.rate}
+                      </p>
+                 
                 ) : null}
               </div>
             </div>
@@ -290,7 +296,10 @@ function App() {
                 </label>
               </div>
               {formik.errors.applied_to && formik.touched.applied_to ? (
-                <div>{formik.errors.applied_to}</div>
+                    <p className="mt-2 text-sm text-red-600" id="email-error">
+                        {formik.errors.applied_to}
+                     
+                    </p>
               ) : null}
             </div>
           </section>
@@ -317,10 +326,13 @@ function App() {
             </div>
             {/* Items list; this will be turned to a reauseable component */}
             {formik.errors.applicable_items && formik.touched.applicable_items ? (
-                <div>{formik.errors.applicable_items}</div>
+                  <p className="mt-2 text-sm text-red-600" id="email-error">
+                      {formik.errors.applicable_items}
+                     
+                  </p>
               ) : null}
             {myData
-              ? myData.map((item, i) => (
+              && myData.map((item, i) => (
                   <List
                     key={i}
                     index={i}
@@ -334,20 +346,7 @@ function App() {
                     setFieldValue={formik.setFieldValue}
                   />
                 ))
-              : red.map((item, i) => (
-                  <List
-                    key={i}
-                    index={i}
-                    items={item.items}
-                    name={item.name}
-                    category={item?.category}
-                    onItemClick={itemClick}
-                    onCategoryCick={categoryClick}
-                    selected={item.selected}
-                    handleChange={formik.handleChange}
-                    setFieldValue={formik.setFieldValue}
-                  />
-                ))}
+            }
           </section>
           <div className="pt-5">
             <div className="flex justify-end">
